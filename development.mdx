@@ -1,94 +1,100 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: "Re-Lending UI Guide"
+description: "A comprehensive guide to the Re-Lending user interface on the 246 Club platform"
 ---
 
-<Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
-</Info>
+# Re-Lending UI Guide
 
-Follow these steps to install and run Mintlify on your operating system.
+Please note that the term "Restake" has been updated to "Re-Lend." All references to "Restake" in the UI guide have been replaced with "Re-Lend" in the official user interface.
 
-<Steps>
-<Step title="Install the Mintlify CLI">
+As outlined in the [Market Structure section](architecture/market-structure), each market on 246Club consists:
 
-```bash
-npm i -g mint
-```
-</Step>
+- • Re-Lending Asset: The asset that re-lenders supply (typically aTokens).
+- • Delegation Asset: The borrowing power derived from re-lenders' collateral, used by borrowers to access capital.
 
-<Step title="Preview locally">
+Since the re-lending asset is what users directly interact with on the interface, this guide will focus on that side of the UI.
 
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+## Re-Lending Table
 
-```bash
-mint dev
-```
+### Re-Lending Asset Column
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+The leftmost column in the UI displays all supported re-lending assets—typically Aave's aTokens like aUSDC, aDAI, etc.
 
-</Step>
-</Steps>
+However, users without existing aToken holdings can also choose to supply the underlying asset (e.g., USDC). Next to each aToken, you'll also see its underlying asset (e.g., USDC for aUSDC, ETH or WETH for aWETH).
 
-## Custom ports
+In that case, the protocol will:
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+1. Deposit the underlying into Aave.
+2. Receive the corresponding aToken.
+3. Automatically re-lend the aToken into 246Club.
 
-```bash
-mint dev --port 3333
-```
+> Note on ETH: Both ETH and WETH are supported as re-lending options, since Aave and 246 treat them equivalently when minting aWETH.
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+Whether you deposit an aToken or its underlying asset, the result is the same—you end up with a re-lent position in the 246 Club market. This feature simply provides flexibility for users without existing Aave positions.
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
+### Balance Column
 
-## Mintlify versions
+Balance column shows the total amount of assets available in your wallet for re-lending.
 
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
+When you hover over the balance number, you'll see a breakdown of:
 
-```bash
-npm mint update
-```
+- • The amount of the aToken (e.g., aUSDC) you hold.
+- • The amount of the underlying asset (e.g., USDC) you hold.
+- • The combined total of both.
 
-## Validating links
+### APY Column
 
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
+APY column displays the Annual Percentage Yield (APY) you'll earn by re-lending.
 
-```bash
-mint broken-links
-```
+Hovering over the APY column reveals a breakdown of:
 
-## Deployment
+- • Underlying APY: The base interest rate you earn from supplying the aToken on Aave (e.g., the supply rate for aUSDC). This is a guaranteed return.
+- • Re-Lend APY: The additional yield you earn by re-lending your aToken and delegating its borrowing power in the 246 Club market.
+- • Combined APY: The total of the two rates.
 
-If the deployment is successful, you should see the following:
+The combined APY helps you estimate the full return on re-lending.
 
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
+[Learn more about how Re-Lend APY works](re-lend-supply/quickstart#c23c0819)
 
-## Code formatting
+## Re-Lend Modal
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
+Clicking the supply button opens a modal where you can configure how much you want to re-lend. There are three sections: one for re-lending aTokens and another for underlying assets and the summary section.
 
-## Troubleshooting
+### 1. Aave Position Section
 
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
+At the top, you'll see a box with the Aave logo. This shows your current aToken balance and borrowing status on Aave tied to the aToken you've selected (e.g., aUSDC or aWETH).
 
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
-  </Accordion>
+If you already have a loan on Aave, your aTokens are likely being used as collateral. In that case, withdrawing and re-lending too much could impact your health factor.
 
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
-  </Accordion>
-</AccordionGroup>
+We show:
 
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).
+- • Current collateral and borrow value
+- • Estimated LTV after re-lending
+- • A visual indicator of the safe threshold
+
+Make sure you stay above the safety threshold to avoid liquidation.
+
+[More on managing Aave positions safely](re-lend-supply/publish-your-docs#20d997f4)
+
+### 2. Underlying Asset Section
+
+Below the Aave box is where you can re-lend underlying assets.
+
+- • You can input any amount within your wallet balance.
+- • For ETH-based assets, WETH is used by default. You can also enable native ETH by checking the "Allow ETH" option.
+
+You can use either or both fields—re-lending will combine the amounts.
+
+### 3. Summary Section
+
+Once you've entered your desired inputs, you'll see the Total Re-Lent Amount reflected. Confirm the transaction to complete re-lending.
+
+## My Position
+
+After a successful transaction, you'll be redirected to the My Position page.
+
+Even if you've re-lent the underlying asset, your re-lending balance will be shown denominated in your aToken balance.
+
+This table is similar to the original re-lending table, with one key difference:
+
+• Balances here reflect your re-lent amount, not what remains in your wallet.

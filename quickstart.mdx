@@ -1,80 +1,64 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: "Re-Lend Quickstart"
+description: "Earn additional yields on your existing lending positions on Aave by capturing fragmented values across different lending markets."
 ---
 
-## Get started in three steps
+# Re-Lend
 
-Get your documentation site running locally and make your first customization.
+Earn additional yields on your existing lending positions on Aave by capturing fragmented values across different lending markets.
 
-### Step 1: Set up your local environment
+> Re-Lend is the "supply side" of 246 Club—similar to how you supply tokens to a typical lending protocol. Here, you supply borrowing power from Aave (via your aTokens) instead of supplying raw assets. This delegated borrowing power is then used by borrowers on 246 Club, generating extra yield for you.
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+## Understanding Re-Lending
 
-### Step 2: Deploy your changes
+Re-Lending allows both new and existing Aave lenders to keep their principal and yield from Aave intact—always earning Aave's deposit rate as a baseline—while earning extra yield by delegating their unused borrowing power to 246 Club. This delegated borrowing power fuels cross-protocol loans, which in turn generate additional returns for re-lenders.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+Let's break down the key points:
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+• **Keep your Aave lending position**
+You retain your aTokens and keep earning Aave's deposit rate—no disruption to your baseline yield.
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+• **Delegate your unused borrowing power**
+The borrowing capacity tied to your aTokens is shared with 246 Club. Borrowers on 246 use this capacity to borrow.
 
-### Step 3: Go live
+• **Cross-protocol loans**
+246 Club uses collateral deposited to various protocols to secure these loans, effectively broadening the pool of potential borrowers and opportunities.
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+• **Capture extra yield**
+Borrowers pay an extra interest rate for tapping your borrowing power. That premium is your added yield on top of Aave's deposit rate.
 
-## Next steps
+#### 1) Background : Aave Lending Positions ( aTokens )
 
-Now that you have your docs running, explore these key features:
+On Aave, when you deposit (lend) assets like USDC or ETH, you receive aTokens (e.g., aUSDC or aETH). These serve two purposes:
 
-<CardGroup cols={2}>
+1. **They represent your lending position and earn interest**
+If you deposit 100 USDC, you get 100 aUSDC that grows over time (100 → 101 → 102, etc.) as interest accumulates.
 
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
+2. **They can be used as collateral**
+Aave lets you borrow against aTokens. If USDC's LTV ratio is 80%, then your 100 aUSDC provides 80 USDC worth of borrowing power.
 
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
+#### 2) Credit Delegation
 
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
+When you re-lend, say, 100 aUSDC in 246 Club, you still earn Aave's interest on that 100 aUSDC. But you also delegate up to 80 USDC worth of borrowing power to 246 Club. 246 Club then lends out that borrowing power to the borrowers of 246 Club.
 
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
+Read more about how these markets are structured [here](https://app.gitbook.com/o/l6NjkdwkcR4A1a4lrrZ4/s/ZJztDv5TUsvn1G46jUB5/architecture/market-structure).
 
-</CardGroup>
+#### 3) Where Additional Yield Comes From
 
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
+The extra yield comes from the borrowers on 246 Club who use your delegated borrowing power to take out loans—sometimes against collaterals that Aave doesn't support. They pay a premium on top of the Aave borrowing rate. This premium goes back to you, the re-lender. [ You can read more about how interest rate model of 246 Club works [here](https://app.gitbook.com/o/l6NjkdwkcR4A1a4lrrZ4/s/ZJztDv5TUsvn1G46jUB5/architecture/interest-rate-model) ]
+
+Put differently:
+
+> You're still lending your assets on Aave for baseline yield, and you're effectively lending your borrowing power on 246 Club for additional yield.
+
+Instead of paying interest when you borrow, you earn more by delegating your borrowing power.
+
+💡 **Example**
+
+For instance, if MEV Capital Usual USDC offers a 10% yield on USDC deposits and Aave offers a 5% borrow rate on USDC, arbitrage activities that are only possible on our platform (246) will cause the borrow rate to converge toward Morpho's deposit rate.
+
+Normally, Aave's deep liquidity pool serves as a stabilizing force, mitigating the impact of interest rate arbitrage on its own rates. Arbitrage pressures in smaller, less liquid protocols often drive their interest rates to align with Aave's, rather than the other way around. As a result, Aave's rates remain more insulated from volatility caused by temporary arbitrage opportunities in other protocols.
+
+Our interest rate model is designed to fully capture these opportunities, benefiting our re-lenders.
+
+If Aave's borrow interest is 5% and we add an additional interest of x%, then the total borrow interest becomes 5% + x%, approaching Morpho's 10% deposit interest. This convergence is effectively captured by our interest rate model, resulting in extra yield for re-lenders.

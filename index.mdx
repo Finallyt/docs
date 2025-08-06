@@ -1,30 +1,64 @@
 ---
-title: "Overview"
-description: "246 Club Documentation Overview"
+title: "Re-Lend Quickstart"
+description: "Earn additional yields on your existing lending positions on Aave by capturing fragmented values across different lending markets."
 ---
 
-# Overview
+# Re-Lend
 
-246 Club aims to enable users to access the best elements of every lending protocol within a single platform—a unified layer where existing money legos are assembled. By harnessing the strengths of various protocols, we aim to create a powerful aggregated system that surpasses the capabilities of individual components.
+Earn additional yields on your existing lending positions on Aave by capturing fragmented values across different lending markets.
 
-## Thesis
+> Re-Lend is the "supply side" of 246 Club—similar to how you supply tokens to a typical lending protocol. Here, you supply borrowing power from Aave (via your aTokens) instead of supplying raw assets. This delegated borrowing power is then used by borrowers on 246 Club, generating extra yield for you.
 
-1. The lending market is horizontally expanding as tokenized yields and asset classes with varied risk-return profiles multiply.
+## Understanding Re-Lending
 
-2. Lending protocols now serve as base-layer infrastructures, each tailored to granular needs and localized markets. Expect further growth as new yield-bearing assets emerge and DeFi widens.
+Re-Lending allows both new and existing Aave lenders to keep their principal and yield from Aave intact—always earning Aave's deposit rate as a baseline—while earning extra yield by delegating their unused borrowing power to 246 Club. This delegated borrowing power fuels cross-protocol loans, which in turn generate additional returns for re-lenders.
 
-3. Localized markets exhibit distinct supply-demand dynamics shaped by collateral-borrow pairs, risk models, or transient market conditions, creating a patchwork of [specialized local equilibria](https://x.com/246_club/status/1881001684534804577).
+Let's break down the key points:
 
-4. Interest-rate arbitrage shines in the form of [atomic cross-protocol](https://x.com/Glovin_/status/1881735272125382697) loans, where collateral is locked in high-demand markets and borrowed from low-demand ones for maximum efficiency.
+• **Keep your Aave lending position**
+You retain your aTokens and keep earning Aave's deposit rate—no disruption to your baseline yield.
 
-## Key Features
+• **Delegate your unused borrowing power**
+The borrowing capacity tied to your aTokens is shared with 246 Club. Borrowers on 246 use this capacity to borrow.
 
-### Lending Restaking
+• **Cross-protocol loans**
+246 Club uses collateral deposited to various protocols to secure these loans, effectively broadening the pool of potential borrowers and opportunities.
 
-Earn additional yields on your existing lending positions on Aave (by capturing fragmented values across different lending markets.) (by delegating borrowing power to capture fragmented values across different lending markets)
+• **Capture extra yield**
+Borrowers pay an extra interest rate for tapping your borrowing power. That premium is your added yield on top of Aave's deposit rate.
 
-### Cross Protocol Loan Position
+#### 1) Background : Aave Lending Positions ( aTokens )
 
-Deposit collateral to high yielding positions to borrow from lending protocols with the best interest rates to optimize loan costs or leverage arbitrage opportunities. e.g. Deposit collateral to Morpho(high yield) and borrow from Aave(interest rate stability)
+On Aave, when you deposit (lend) assets like USDC or ETH, you receive aTokens (e.g., aUSDC or aETH). These serve two purposes:
 
-Furthermore, if you're lending on protocols that don't allow native rehypothecation (can't borrow against your lending position) such as Morpho, you can use 246 to borrow from Aave against or leverage your existing deposit positions to maximize yield or access capital from your current holdings.
+1. **They represent your lending position and earn interest**
+If you deposit 100 USDC, you get 100 aUSDC that grows over time (100 → 101 → 102, etc.) as interest accumulates.
+
+2. **They can be used as collateral**
+Aave lets you borrow against aTokens. If USDC's LTV ratio is 80%, then your 100 aUSDC provides 80 USDC worth of borrowing power.
+
+#### 2) Credit Delegation
+
+When you re-lend, say, 100 aUSDC in 246 Club, you still earn Aave's interest on that 100 aUSDC. But you also delegate up to 80 USDC worth of borrowing power to 246 Club. 246 Club then lends out that borrowing power to the borrowers of 246 Club.
+
+Read more about how these markets are structured [here](https://app.gitbook.com/o/l6NjkdwkcR4A1a4lrrZ4/s/ZJztDv5TUsvn1G46jUB5/architecture/market-structure).
+
+#### 3) Where Additional Yield Comes From
+
+The extra yield comes from the borrowers on 246 Club who use your delegated borrowing power to take out loans—sometimes against collaterals that Aave doesn't support. They pay a premium on top of the Aave borrowing rate. This premium goes back to you, the re-lender. [ You can read more about how interest rate model of 246 Club works [here](https://app.gitbook.com/o/l6NjkdwkcR4A1a4lrrZ4/s/ZJztDv5TUsvn1G46jUB5/architecture/interest-rate-model) ]
+
+Put differently:
+
+> You're still lending your assets on Aave for baseline yield, and you're effectively lending your borrowing power on 246 Club for additional yield.
+
+Instead of paying interest when you borrow, you earn more by delegating your borrowing power.
+
+💡 **Example**
+
+For instance, if MEV Capital Usual USDC offers a 10% yield on USDC deposits and Aave offers a 5% borrow rate on USDC, arbitrage activities that are only possible on our platform (246) will cause the borrow rate to converge toward Morpho's deposit rate.
+
+Normally, Aave's deep liquidity pool serves as a stabilizing force, mitigating the impact of interest rate arbitrage on its own rates. Arbitrage pressures in smaller, less liquid protocols often drive their interest rates to align with Aave's, rather than the other way around. As a result, Aave's rates remain more insulated from volatility caused by temporary arbitrage opportunities in other protocols.
+
+Our interest rate model is designed to fully capture these opportunities, benefiting our re-lenders.
+
+If Aave's borrow interest is 5% and we add an additional interest of x%, then the total borrow interest becomes 5% + x%, approaching Morpho's 10% deposit interest. This convergence is effectively captured by our interest rate model, resulting in extra yield for re-lenders.
