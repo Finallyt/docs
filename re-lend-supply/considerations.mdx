@@ -1,0 +1,51 @@
+---
+title: "Considerations for Re-Lending"
+description: "Risks and mechanics to understand before re-lending on 246 Club."
+---
+
+# Considerations for Re-Lending
+
+## Risk of Aave
+
+At 246 Club, we build our Re-Lending on Aave, a leading DeFi lending protocol with a strong history of security and resilience across multiple blockchain networks. While Aave’s proven track record gives us a solid foundation, our Re-Lending mechanism—using Aave positions like aUSDC as underlying assets—introduces specific risks. Here’s how we manage Aave-related risks to keep our markets stable.
+
+Our primary exposure comes from the lending positions on Aave, such as aUSDC, that re-lenders use in markets like [aUSDC]USDC. If bad debt (unrepayable loans) occurs in the aUSDC pool, it could affect your re-lend position. For example, if you re-lend 100 aUSDC, bad debt on Aave might impact the stability of that position in our market.
+
+However, with Aave’s Optimistic Accounting, Aave delays the impact of bad debt on aTokens like aUSDC. If bad debt occurs, your 100 aUSDC won’t lose value immediately, giving us time to address the issue.
+
+Also, Aave’s Umbrella feature will prevent small bad debt from accumulating and absorb any residual debt, further protecting your re-lend position.
+
+For a deeper understanding, check Aave’s risk documentation on market volatility, smart contracts, and liquidations.
+
+## Liquidity Risk
+
+In Re-Lending, liquidity risk arises when the demand for borrowing exceeds the available borrowing power, potentially limiting withdrawals from the pool. We manage this risk by monitoring utilization and using mechanisms to balance supply and demand.
+
+**Utilization Ratio in Re-Lending Market**
+
+The utilization ratio in a Re-Lending market tells us how much of the delegated borrowing power is being used:
+
+`Utilization Ratio = Borrowing Power Used / Total Delegated Borrowing Power`
+
+Example with the [aUSDC]USDC market: delegate 80 USDC borrowing power, 72 USDC used → 90% utilization. The underutilized portion (10%) determines withdrawable amount: 100 aUSDC × 10% = 10 aUSDC.
+
+High utilization reduces immediate withdrawable amounts; rate curves incentivize rebalancing via higher borrow rates and better re-lender yields.
+
+## Collateral Risk and Liquidation Mechanics (Aave Position)
+
+In re-lending, an Aave position (backed by your aTokens) and a 246 Club position (backed by borrower collateral) coexist.
+
+To mitigate liquidation risk on Aave:
+
+1. Match re-lending and delegation assets (e.g., aUSDC → USDC) to avoid price basis risk.
+2. Leverage Aave’s optimistic accounting and features to buffer small bad debt.
+3. Account for net negative APY from borrow vs deposit spread; long-term drift is slow given buffers.
+4. Maintain buffers (e.g., over-allocating aToken collateral) informed by historical deviations and net APY trends.
+5. Use `adjustDelegation` to add aToken collateral from the re-lending pool if health falls below threshold; supported by automation and manual backstops.
+
+Extreme liquidation requires rapid rate spikes and failures of automated/manual safeguards, or major depegs.
+
+If liquidation occurs on Aave (50% close factor), the remaining debt is covered by repayments on 246 Club; penalties are absorbed by additional interest or reserves.
+
+> Source: [Re-Lend (Supply) — Considerations for Re-Lending](https://246-club.gitbook.io/docs/re-lend-supply/publish-your-docs)
+

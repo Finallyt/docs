@@ -29,6 +29,14 @@
             ]
           },
           {
+            "group": "Re-Lend (Supply)",
+            "pages": [
+              "re-lend-supply/quickstart",
+              "re-lend-supply/considerations",
+              "re-lending-ui-guide"
+            ]
+          },
+          {
             "group": "Customization",
             "pages": [
               "essentials/settings",
