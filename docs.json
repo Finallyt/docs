@@ -20,20 +20,21 @@
               "246-club-in-one-page"
             ]
           },
-          {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
+          
           {
             "group": "Re-Lend (Supply)",
             "pages": [
               "re-lend-supply/quickstart",
               "re-lend-supply/considerations",
-              "development"
+              "re-lending-ui-guide"
+            ]
+          },
+          {
+            "group": "Cross-Protocol Loan (Borrow)",
+            "pages": [
+              "cross-protocol-loan/overview",
+              "cross-protocol-loan/managing-loan-position",
+              "cross-protocol-loan/ui-guide"
             ]
           },
           {
@@ -65,14 +66,6 @@
       {
         "tab": "API reference",
         "groups": [
-          {
-            "group": "Cross-Protocol Loan (Borrow)",
-            "pages": [
-              "cross-protocol-loan/overview",
-              "cross-protocol-loan/managing-loan-position",
-              "cross-protocol-loan/ui-guide"
-            ]
-          },
           {
             "group": "API documentation",
             "pages": [
