@@ -1,0 +1,13 @@
+---
+title: "Liquidation"
+description: "Liquidation mechanics and protections across Aave and 246 Club positions."
+---
+
+# Liquidation
+
+Liquidation risk arises primarily on the borrow side (Aave) if a position’s health factor falls below threshold. 246 Club employs buffers and the `adjustDelegation` mechanism to add aToken collateral from the re-lending pool when needed.
+
+If liquidation occurs on Aave (close factor ~50%), debt is partially repaid and collateral is reduced. Repayments on 246 Club cover remaining Aave debt, while penalties are absorbed by added interest or reserves.
+
+> Source: [Architecture — Liquidation](https://246-club.gitbook.io/docs/architecture/liquidation)
+

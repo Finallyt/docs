@@ -1,0 +1,29 @@
+---
+title: "Cross-Protocol Loan"
+description: "Deposit collateral in one protocol (e.g., Morpho) and borrow from another (e.g., Aave)."
+---
+
+# Cross-Protocol Loan
+
+The Cross-Protocol Loan enables borrowers to deposit collateral in one protocol (e.g., Morpho Earn Vault) and borrow against it from another (e.g., Aave). This lets you earn yield on your collateral while accessing the best borrowing opportunities elsewhere.
+
+## How it works
+
+- Deposit collateral into Morpho (for example, a Morpho Vault position).
+- Borrow assets from Aave against that collateral.
+- If you don’t already have a Morpho position, the UI allows you to “zap” into a Morpho Vault and immediately borrow against it from Aave.
+- Interest rate arbitrage emerges between the yield on Morpho deposits and Aave borrowing rates.
+
+## Example
+
+1. Zap USDC into a Morpho Earn Vault to start earning vault yield.
+2. Use that position as collateral to borrow USDC from Aave at a competitive borrow rate.
+3. Manage the health factor by repaying or adding collateral as rates and prices move.
+
+## Notes
+
+- Health must be maintained similar to any lending market position.
+- Liquidations can occur if the health factor falls too low; see Managing Loan Position for details.
+
+> Source: [246 Club Docs — 246 Club in One Page](https://246-club.gitbook.io/docs/246-club-in-one-page)
+
