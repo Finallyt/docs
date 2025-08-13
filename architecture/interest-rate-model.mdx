@@ -1,0 +1,17 @@
+---
+title: "Interest Rate Model"
+description: "How additional interest is priced to capture cross-protocol arbitrage and reward re-lenders."
+---
+
+# Interest Rate Model
+
+246 Club’s interest rate model adds a premium on top of Aave’s borrow rates to capture cross-protocol opportunities (e.g., Morpho deposit yield vs Aave borrow rate). The premium converges total borrow costs toward external deposit yields when arbitrage is present, sharing upside with re-lenders.
+
+Key goals:
+
+- Incentivize balanced utilization in re-lending pools
+- Capture external yield differentials as additional borrower premium
+- Return incremental yield to re-lenders
+
+> Source: [Architecture — Interest Rate Model](https://246-club.gitbook.io/docs/architecture/interest-rate-model)
+

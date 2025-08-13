@@ -54,6 +54,15 @@
             ]
           },
           {
+            "group": "Architecture",
+            "pages": [
+              "architecture/market-structure",
+              "architecture/segmented-risk-exposure",
+              "architecture/interest-rate-model",
+              "architecture/liquidation"
+            ]
+          },
+          {
             "group": "AI tools",
             "pages": [
               "ai-tools/cursor",

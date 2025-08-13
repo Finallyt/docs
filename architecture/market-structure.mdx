@@ -1,0 +1,23 @@
+---
+title: "Market Structure"
+description: "How 246 Club structures re-lending markets and cross-protocol borrowing to aggregate liquidity."
+---
+
+# Market Structure
+
+246 Club aggregates lending and borrowing across protocols by separating where collateral earns yield and where debt is sourced. Re-lenders delegate borrowing power from aTokens, while borrowers post collateral elsewhere (e.g., Morpho) and draw debt (e.g., on Aave).
+
+## Components
+
+- Re-lending pools backed by aTokens (e.g., aUSDC)
+- Delegated borrowing power routed to borrower positions
+- Cross-protocol settlement that ensures debts are covered by external collateral
+
+## Flow overview
+
+1. Lenders deposit or provide aTokens, delegating borrowing power to the pool.
+2. Borrowers post collateral in a supported protocol and borrow from Aave against that collateral.
+3. Interest-rate differentials are captured, sharing premium with re-lenders.
+
+> Source: [Architecture — Market Structure](https://246-club.gitbook.io/docs/architecture/market-structure)
+
