@@ -99,7 +99,6 @@
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
-  "navbar": { "links": [], "primary": { "type": "button", "label": "App", "href": "/" } },
   "contextual": {
     "options": [
      "copy",
