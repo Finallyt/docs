@@ -33,7 +33,7 @@
             "pages": [
               "re-lend-supply/quickstart",
               "re-lend-supply/considerations",
-              "re-lending-ui-guide"
+              "development"
             ]
           },
           {
@@ -65,6 +65,14 @@
       {
         "tab": "API reference",
         "groups": [
+          {
+            "group": "Cross-Protocol Loan (Borrow)",
+            "pages": [
+              "cross-protocol-loan/overview",
+              "cross-protocol-loan/managing-loan-position",
+              "cross-protocol-loan/ui-guide"
+            ]
+          },
           {
             "group": "API documentation",
             "pages": [
