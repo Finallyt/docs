@@ -1,0 +1,50 @@
+---
+title: "246 Club in One Page"
+description: "A concise summary of 246 Club’s functionality and purpose."
+---
+
+# 246 Club in One Page
+
+This single page alone provides a complete and clear understanding of 246 Club’s functionality and purpose.
+
+## Re-Lending
+
+Re-Lending allows users to maximize yield by combining the baseline yield from Aave deposits with additional yield from 246 Club.
+
+Re-Lenders remain passive, earning Aave’s baseline yield plus additional returns captured from interest rate arbitrage activities of active borrowers.
+
+Users supply either an **aToken** (e.g., aUSDC) or its **underlying asset** (e.g., USDC).
+
+**What assets can be Re-Lent:**
+
+- If you supply an underlying asset, it is first deposited into Aave to generate an aToken, which is then re-lent to 246 Club.
+- If you supply an aToken directly, it is re-lent to 246 Club.
+
+In both cases, the result is a **Re-Lending position** in the 246 Club market.
+
+**How it works (Credit Delegation):**
+
+- When you lend to Aave (e.g., 100 USDC), you receive an aToken as a receipt of your deposit (e.g., 100 aUSDC) and gain borrowing power based on Aave’s LTV ratio. For example, with an 80% LTV, you can borrow up to 80 USDC.
+- By re-lending your aToken (e.g., 100 aUSDC) to 246 Club, you delegate this borrowing power (e.g., 80 USDC in this case) to the protocol.
+- Borrowers on 246 Club utilize this borrowing power and pay additional interest, which generates the extra yield for your Re-Lending position.
+
+> You cannot borrow against a re-lending position from 246 Club.
+
+## Cross-Protocol Loan
+
+The Cross-Protocol Loan enables borrowers to deposit collateral in one protocol (e.g., Morpho Earn Vault) and borrow against it from another (e.g., Aave).
+
+This allows borrowers to earn yield on their collateral in one protocol while taking advantage of borrowing opportunities in another.
+
+**How it works:**
+
+- Users can deposit collateral into Morpho (e.g., a Morpho Vault position) and borrow assets from Aave.
+- If you don’t have an existing Morpho position, 246 Club’s user interface allows you to “zap” into a Morpho Vault position and immediately borrow against it from Aave.
+- This setup supports interest rate arbitrage between yield from Morpho deposits and borrowing rates from Aave.
+
+**Loan Management:**
+
+- Once established, the loan position must be maintained to ensure a healthy loan-to-value ratio, similar to other lending markets. See Managing Loan Position for details.
+
+> Source: [246 Club Docs — 246 Club in One Page](https://246-club.gitbook.io/docs/246-club-in-one-page)
+
