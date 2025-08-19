@@ -49,3 +49,34 @@ If liquidation occurs on Aave (50% close factor), the remaining debt is covered 
 
 > Source: [Re-Lend (Supply) — Considerations for Re-Lending](https://246-club.gitbook.io/docs/re-lend-supply/publish-your-docs)
 
+## Re-Lending for existing Borrowers of Aave
+
+If you’re currently borrowing on Aave, you can re-lend a portion of your aTokens while keeping your loan safe. For example, if you re-lend 20 aUSDT out of 100 aUSDT, you’ll have 80 aUSDT left backing your 20 DAI loan. Your Loan-to-Value (LTV) adjusts from 20% to 25% (20/80). Re-lend as much as feels comfortable for your risk preferences.
+
+## Risk Specific to Credit Delegation
+
+### 1) The Dual-Position Structure in Re-Lending
+
+When a borrower opens a loan via 246 Club, two positions exist:
+
+1. Aave Position (re-lender): 100 aUSDC collateral; 80 USDC debt via delegation (LTV 80%).
+2. 246 Club Position (borrower): 100 USDC collateral (e.g., on Morpho); 80 USDC borrowed using delegated power.
+
+These are interconnected but governed by different risk parameters.
+
+### 2) Risk Management for the Aave Position
+
+1. Matching re-lending and delegation assets (e.g., aUSDC → USDC) removes price basis risk.
+2. Leverage Aave’s optimistic accounting and Umbrella (to absorb small residual debt).
+3. Handle interest accumulation: borrow APY > deposit APY implies slow net negative drift; buffers delay liquidation timelines.
+4. Buffer against volatility: allocate extra aToken collateral (e.g., 110 aUSDC backing 80 USDC debt).
+5. Public `adjustDelegation`: if health falls below threshold, anyone can add aToken collateral from the re-lending pool. Backed by bots and manual intervention.
+
+### 3) Extreme Scenarios for Liquidation
+
+Liquidation on Aave would require rapid rate spikes with simultaneous automation failures, or a major, fast depegging that overwhelms buffers.
+
+### 4) What Happens If Liquidation Occurs?
+
+With Aave’s ~50% close factor, half the debt is repaid and collateral is reduced. The remaining Aave debt is covered by repayments on 246 Club. Liquidation penalties are absorbed by incremental interest earned or a dedicated reserve (to be introduced).
+
